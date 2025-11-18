@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Realtime Map Road Drawing</title>
+  <style>body{font-family:system-ui;padding:12px}#mapCanvas{width:100%;height:400px;background:#eee}</style>
+</head>
+<body>
+  <input id="wordInput" placeholder="단어 입력"/>
+  <button id="addBtn">추가</button>
+  <span id="status"></span>
+  <div id="mapArea"><canvas id="mapCanvas"></canvas></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>
