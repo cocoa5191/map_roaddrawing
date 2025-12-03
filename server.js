@@ -18,7 +18,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', (socket) => {
   socket.emit('wordsUpdate', words);
   socket.lastPost = 0;
+// 클라이언트가 텍스트나 위치를 업데이트했을 때
+    socket.on('updateData', (data) => {
+        // 👇 [추가] 서버 로그: 데이터가 들어오는지 확인
+        console.log(`[Server] Update from ${socket.id}:`, data.text); 
 
+        if (players[socket.id]) {
+            players[socket.id].text = data.text;
+            players[socket.id].x = data.x;
+            players[socket.id].y = data.y;
+            players[socket.id].seed = data.seed; // seed도 업데이트 되는지 확인
+
+            // 다른 모든 사람에게 변경 사항 전송
+            socket.broadcast.emit('playerUpdated', { id: socket.id, data: players[socket.id] });
+        }
+    });
   socket.on('addWord', (text) => {
     if (!text || typeof text !== 'string') return;
     const now = Date.now();
@@ -32,4 +46,8 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+// Render가 지정해주는 포트를 쓰거나, 없으면 3000번을 쓴다는 뜻
+
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

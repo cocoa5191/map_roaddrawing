@@ -62,6 +62,7 @@ const wordMapSketch = function(p) {
 
         // 3. 다른 플레이어 정보 업데이트 (글자 쓰거나 이동 시)
         socket.on('playerUpdated', (pInfo) => {
+            console.log('남의 데이터 받음:', pInfo);
             otherPlayers[pInfo.id] = pInfo.data;
         });
 
@@ -194,9 +195,12 @@ const wordMapSketch = function(p) {
 
     // 서버에 내 데이터 변경 알림
     function sendUpdate() {
+       
+
+        // 👇 [추가] 내가 데이터를 보낼 때마다 콘솔에 출력
+        console.log('내가 서버로 보냄:', myData);
         socket.emit('updateData', myData);
     }
-
     p.mousePressed = function() { offsetX = p.mouseX - centerX; offsetY = p.mouseY - centerY; }
     
     p.keyReleased = function() { 
