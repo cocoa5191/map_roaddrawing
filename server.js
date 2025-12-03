@@ -18,6 +18,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', (socket) => {
   socket.emit('wordsUpdate', words);
   socket.lastPost = 0;
+  
+
+  // 👇 [수정] cors 옵션을 추가해서 모든 접속(*)을 허용해 줍니다.
+const io = new Server(server, {
+    cors: {
+        origin: "*",  // 모든 주소에서 접속 허용
+        methods: ["GET", "POST"]
+    }
+});
 // 클라이언트가 텍스트나 위치를 업데이트했을 때
     socket.on('updateData', (data) => {
         // 👇 [추가] 서버 로그: 데이터가 들어오는지 확인
