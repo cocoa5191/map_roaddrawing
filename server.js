@@ -57,6 +57,6 @@ const io = new Server(server, {
 
 // Render가 지정해주는 포트를 쓰거나, 없으면 3000번을 쓴다는 뜻
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 });
