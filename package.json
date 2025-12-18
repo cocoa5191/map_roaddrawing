@@ -1,12 +1,10 @@
 {
-  "name": "map-realtime",
+  "name": "map-roaddrawing",
   "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
+  "private": true,
+  "description": "p5.js word map with Firebase realtime persistence.",
+  "scripts": {},
   "dependencies": {
-    "express": "^4.21.2",
-    "socket.io": "^4.8.1"
+    "firebase": "^12.7.0"
   }
 }
